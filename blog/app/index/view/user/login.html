@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+	<title>用户登录--码农博客-PHP技术交流博客</title>
+	<link rel="stylesheet" href="public/styles/reset.css">
+	<link rel="stylesheet" href="public/styles/fonts.css">
+	<link rel="stylesheet" href="public/styles/coding.css">
+	<link type="image/x-icon" href="public/images/global/favicon.ico" rel="icon">
+</head>
+
+<body>
+	<!-- 头部区域开始 -->
+	<div id="header">
+		<div class="header-wrapper">
+			<div class="header-logo">
+				<a href="?a=index&c=index" title="码农博客">首页</a>
+			</div>
+			<ul class="header-tools">
+				<li class="header-login">登录</li>
+				<li class="header-register"><a href="?a=register&c=user">注册</a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- 头部区域结束 -->
+	<!-- 登录主要区域开始 -->
+	<div id="login-main"
+		style="background-image: url(public/images/background/547597176a433.jpg); background-size: cover;">
+		<div id="login-main-inner">
+			<form action="?a=doLogin&c=user" method="post" id="login-form">
+				<div id="login-title">账号登录</div>
+				<ul>
+					<li class="input-field">
+						<input type="text" name="username" id="username" class="tiny-input-text" placeholder="账号名">
+					</li>
+					<li class="input-field">
+						<input type="password" name="password" id="password" class="tiny-input-text" placeholder="密码">
+					</li>
+					<li class="input-field">
+						<input type="text" name="verify" id="verify" class="tiny-input-text verify-input-text"
+							placeholder="验证码">
+						<img src="?a=captcha&c=user" onclick="this.src='?a=captcha&c=user&'+Math.random()" alt=""
+							id="captcha-image">
+					</li>
+					<li class="input-field">
+						<input type="submit" value="登录" id="btn-submit">
+					</li>
+				</ul>
+			</form>
+		</div>
+	</div>
+	<!-- 登录主要区域结束 -->
+	<!-- 页脚区域开始 -->
+	<div id="footer">
+		<div class="tidy-content">
+			<p>隐私策略 |服务条款 | 安全策略</p>
+			<p>&copy; 2020 森沐互娱 版权所有 | 赣ICP备1848339732号-1231</p>
+		</div>
+	</div>
+	<!-- 页脚区域结束 -->
+	<script src="public/scripts/jquery-3.1.0.js"></script>
+	<script src="public/scripts/chunk.js"></script>
+</body>
+
+</html>

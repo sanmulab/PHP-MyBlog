@@ -1,0 +1,251 @@
+﻿博客项目
+
+网站基本都分前后台, 除非是纯静态网站才只有前台,不需要实时变化的
+
+需要实时变化的网站 就需要后台来支持. 
+后台网站的作用: 就是让不会编程的普通人, 也能够轻松修改 数据库的内容
+给数据库做了一个可视化的操作界面.
+
+制作顺序:
+一定要先做后台, 因为只有后台录入了数据, 前台才有内容可以展示.
+
+============================================================
+作为一个大型项目, 代码量会非常多, 文件数量也会非常多, 如果都存放在一个目录中, 会非常麻烦, 难以查看和寻找. 
+
+所以: 必须按照文件的功能 分门别类进行存放, 存放在不同的文件夹中
+
+项目的目录结构:
+
+blog
+--app      application缩写, 应用. 存放本项目的应用代码
+----admin  后台代码
+------model
+------view
+------controller
+----index  前台代码
+------model
+------view
+------controller
+--upload   上传的文件
+----admin  后台上传的
+----index  前台上传的
+--libs     封装的工具类: Db Upload Captcha Page...
+--assets   资源: 项目用到的 图片/音频/视频等.
+--data     存放一些数据库相关的文件 *.sql
+--index.php  入口文件
+--change.log 记录每天代码的变化, 日志文件
+
+===============================================
+文件的搭建
+
+后台文件搭建:
+按照业务功能对后台代码进行拆分
+
+业务分类:
+- 文章分类 : category
+- 文章 : article
+- 用户 : user
+- 角色 : role
+- 控制台 : index
+
+要认识的英文单词:
+create 创建,建立
+destroy 删除,销毁
+list    列表
+store   存储
+edit    编辑
+update  更新
+
+===========================================
+后台分MVC
+
+model : 数据模型
+--CategoryModel.php
+--ArticleModel.php
+--UserModel.php
+--RoleModel.php
+--IndexModel.php
+
+view: 放前端文件的
+--category
+--article
+--user
+--role
+--index
+
+controller
+--CategoryController.php
+--ArticleController.php
+--UserController.php
+--RoleController.php
+--IndexController.php
+
+==================================================
+把前端工程师 书写的前端文件 按照业务功能 存放在不同的 文件夹下
+====================================================================================================================================================
+做mvc项目, 一定要学会查看超链接
+
+?a=zhazha&c=zhe
+
+能推测出:
+1. 方法名 是 zhazha()
+2. 前端文件名 zhazha.html
+3. 类名: ZheController.php
+4. 前端文件夹  zhe
+
+
+
+?c=user&a=login
+
+1. 类名  UserController
+2. 方法名 login
+3. 前端文件名 login.html
+4. 文件夹名  user
+
+
+
+开始后台开发  开始后台开发  开始后台开发  开始后台开发  开始后台开发
+
+文章相关的:
+
+发表文章: ?a=create&c=article
+- 文件上传比较难:可以先不做.   制作时要使用之前封装的 Upload 类
+- 页面中有分类下拉选择框, 此处需要通过数据库查询出所有的分类显示在下拉框中
+- 观察 data.sql, 带有默认值的字段可以不写值
+- 管理员id  从 session 中读取 当前管理员的id
+
+文章列表: ?a=listt&c=article
+- 分类名: 需要联合分类表才能查询出来, 多表联查 (难)
+- 最有一列的眼睛: 文章分上线和下线状态, 字段是is_online.  此处要判断一下, 文章上线状态 则显示下线的眼睛, 下线状态显示上线眼
+
+删除文章: ?a=destroy&c=article&id=文章id
+
+文章上线: ?a=online&c=article&id=xxx
+-- 更新 is_online字段为 1
+
+文章下线: ?a=offline&c=article&id=xxx
+-- 更新 is_online字段为 0
+
+编辑文章: ?a=edit&c=article&id=xxx
+         ?a=update&c=article&id=xxx
+-- 难点: 编辑页面的下拉选项应该是 当前文章的默认分类选择项
+         参考 student 项目的 编辑页面的 性别
+         查询出所有的分类 进行展示
+===========================================================
+用户管理:
+添加用户: ?a=create&c=user
+-- 用户角色下拉框中的选项应该是从  coding_admin_role 表中查出来的
+
+用户列表: ?a=listt&c=user
+-- 需要联合 角色表 才能查出 用户的角色名
+
+删除用户: ?a=destroy&c=user&id=用户id
+
+编辑用户: ?a=edit&c=user&id=用户id
+
+
+===========================================================
+
+后台剩余所有功能
+
+编写 删除 和 编辑功能
+
+完成 用户的创建 列表 删除 和 编辑功能
+
+
+角色列表: ?a=listt&c=role
+-- 难点: 数量的显示, 需要联合查询, 不会可以先不显示
+
+个人资料:  修改的是当前登录用户的资料, 当前用户信息存储在 session 中
+    修改密码: ?a=editPassword&c=user
+    修改个人资料: ?a=editProfile&c=user
+
+控制台信息展示
+
+不同角色显示不同的侧边栏功能
+-- 普通: 文章 和 个人资料 1
+-- 超管: 可以使用所有功能 3 
+-- 管理员: 文章 分类 个人资料 2
+
+文章列表页面的 分页制作
+
+管理员退出功能
+?a=logout&c=admin
+
+方法名: logout()
+前端文件名: logout.html
+类: AdminController
+文件夹名: admin
+类所在的文件名:AdminController.php
+
+
+===========================================================
+
+
+前台网站: 资源在 新版码农博客\client 中
+
+入口: 
+前台网站 : index.php
+后台网站 : admin.php
+
+index.php 具有特点: 会自动访问此文件
+这种易用性应该给我们的普通用户, 即前台网站
+============================================================
+index.php 的变化:
+1. 路径: app\index\controller\xxx
+2. c 和 a 的默认值 都修改成 index
+
+3. 默认的首页: ?a=index&c=index
+    方法名 index()
+    html: index.html
+    控制器: IndexController
+    文件名: IndexController.php
+    前端文件夹: index
+
+4. 控制器父类: 添加了 indexPath() 方法, 用于提供前台页面
+
+5. 资源拷贝: client/public 文件夹拷贝到 项目的根目录中, 才有UI
+
+  
+完成 注册 登录 退出 密码修改 设置修改 功能
+
+注册: 
+    显示注册页面: ?a=register&c=user    存储用户信息到coding_user 表中  
+    执行注册操作: ?a=store&c=user    到coding_user表中查找是否存在
+    验证码可以先不管, 等讲解.
+    完成后显示 打印出登录失败即可, 目前没有专门的结果页面
+
+登录: 
+    显示登录页面: ?a=login&c=user
+    执行登录操作: ?a=doLogin&c=user
+    验证码可以先不管
+    完成后显示 打印出登录失败即可, 目前没有专门的结果页面
+    登录成功时 要保存用户信息到session中, 键用 user
+    首页 index.html 中的导航栏要根据登录状态显示不同的项目
+    
+退出: ?a=logout&c=user    清空session 并跳转回到首页
+
+修改密码: ?a=changePass&c=user
+
+修改个人设置: ?a=changeSetting&a=user
+
+===========================================================
+最后前台内容
+1. 首页导航栏中的分类应该是从 分类表 coding_category 查询出来的, 并且按照 sort_number 字段 从大到小排序
+    所以: index() 方法中 应该查询出所有分类 并在 index.html 中循环展示
+
+2. 首页要显示出文章列表, 从 coding_article 中查询出 上线 is_online=1 的文章, 按照创建时间 降序排列, 即 新发表的在前端
+
+3. 点击文章以后:?a=varticle&c=article&id=文章id
+进入到文章详情页, 文章详情页中的导航栏 与 首页一致
+所以应该提取导航栏代码 到 public/navbar.html 中, 然后通过 include 引入来复用.
+
+4. 在文章详情页 显示出各种信息. 
+    varticle() 方法中会有大量的 数据库操作
+
+5. 评论功能:
+    提交评论: ?a=create&c=comment&aid=文章id
+                评论人的id 就是当前登录用户的id
+    评论提交成功后 直接header 跳转回到 文章详情页
+
+    在详情页下方 要查询出所有评论 按照发表时间排序

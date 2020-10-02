@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>码农博客管理员登录</title>
+	<link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/custom-login.css">
+	<style>
+		body{background-color: black}
+		 canvas{
+                  position:relative;
+                  top:0;
+                  left:0;
+                  background-color:black;
+} 
+     .log{position: absolute;top: 25%;left: 35%;}
+      audio{width: 27.4%;position: absolute;top: 26%;left: 35%;}
+	</style>
+</head>
+<body>
+<div>
+	<canvas id="c"></canvas>
+<script src="assets/js/coolline.js"></script>
+
+	<div id="login-wrapper" class="log">
+		<div id="login-wrapper-inner">
+			<div id="login-wrapper-image">
+				<img src="images/success2.gif" alt="" class="img-thumbnail img-responsive" width="150px" height="180px;">
+			</div>
+			<div id="login-wrapper-text">
+				<h2 class="login-title">管理员登录成功...</h2>
+				<ul class="login-list">
+					<li>可以轻松进行分类、文章、用户管理；</li>
+					<li>所见即所得的文章编辑模式；</li>
+					<li>便捷的用户管理系统；</li>
+				</ul>
+			</div>
+		</div>
+		<!-- a=方法名&c=控制器名 -->
+		<a href="?a=index&c=index" class="link-btn">进入后台</a> 
+	</div>	
+</div>
+         <div>
+			<audio src="assets/DAISHI DANCE、Cecile Corbel - Take Me Hand.mp3" controls="controls"
+               loop="2" autoplay="autoplay" type="audio/mpeg"></audio>
+		</div>
+</body>
+
+</html>

@@ -1,0 +1,137 @@
+﻿<!-- <?php
+    //session_start();
+    if (!isset($_SESSION['username']) && !empty($_SESSION['user'])) {
+        //header('Location:?a=login');
+        echo "您还没有登录，<a href='?a=login'>请先登录!</a>";
+        return false;
+    }
+?> -->
+
+<?php $rid = $_SESSION['admin']['role_id'];?>
+<div id="sidebar" class="sidebar  responsive ace-save-state">
+    <script type="text/javascript">
+        try { ace.settings.loadState('sidebar') } catch (e) { }
+    </script>
+    <ul class="nav nav-list">
+        <li class="active">
+            <a href="?a=index&c=index">
+                <i class="menu-icon fa fa-tachometer"></i>
+                <span class="menu-text"> 控制台 </span>
+            </a>
+        </li>
+        <!-- 文章分类: 超管 和 管理员可见 -->
+        <?php if($rid == 2 || $rid == 3){?>
+        <li>
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-desktop"></i>
+                <span class="menu-text">
+                    文章分类
+                </span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="?a=create&c=category">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        添加分类
+                    </a>
+                </li>
+                <li>
+                    <a href="?a=listt&c=category">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        分类列表
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <?php }?>
+        <li>
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-list"></i>
+                <span class="menu-text">
+                    文章管理
+                </span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <ul class="submenu">
+                <li class="">
+                    <a href="?a=create&c=article">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        发表文章
+                    </a>
+                </li>
+                <li>
+                    <a href="?a=listt&c=article">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        文章列表
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- 超管可见: 角色管理 和 用户管理 -->
+        <?php if($rid == 3){?>
+        <li>
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon glyphicon glyphicon-user"></i>
+                <span class="menu-text"> 用户管理 </span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="?a=create&c=user">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        添加用户
+                    </a>
+                </li>
+                <li>
+                    <a href="?a=listt&c=user">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        用户列表
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-cutlery"></i>
+                <span class="menu-text"> 角色管理 </span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="?a=listt&c=role">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        角色列表
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <?php }?>
+        <li>
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon glyphicon glyphicon-info-sign"></i>
+                <span class="menu-text"> 个人资料 </span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="?a=editPassword&c=user">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        修改密码
+                    </a>
+                </li>
+                <li>
+                    <a href="?a=editProfile&c=user">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        修改个人资料
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+        <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state"
+            data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+    </div>
+</div>

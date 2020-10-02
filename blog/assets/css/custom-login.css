@@ -1,0 +1,73 @@
+ul, ol, h1, h2, h3, h4, h5 {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #ccc;
+}
+
+#login-wrapper {
+    width: 520px;
+    height: 300px;
+    padding: 20px;
+    margin: 50px auto 0 auto;
+    background-color: #fff;
+    border-radius: 6px;
+}
+
+#login-wrapper-inner::after {
+    content: '.';
+    display: block;
+    height: 0;
+    visibility: hidden;
+    clear: both;
+}
+
+#login-wrapper #login-wrapper-image {
+    float: left;
+    margin-top: 60px;
+}
+
+#login-wrapper #login-wrapper-text {
+    float: left;
+    margin-top: 70px;
+    margin-left: 40px;
+}
+
+#login-wrapper #login-wrapper-text .login-title {
+    position: relative;
+    font-size: 14px;
+    color: #252B3A;
+    line-height: 20px;
+    height: 20px;
+    margin-bottom: 10px;
+}
+
+#login-wrapper #login-wrapper-text .login-list {
+    font-size: 14px;
+    color: #ccc;
+    line-height: 2;
+}
+
+.link-btn {
+    width: 160px;
+    margin-top: 10px;
+    display: block;
+    font-size: 12px;
+    color: #FFF;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 16px;
+    padding: 8px 20px;
+    vertical-align: top;
+    background: #F66F6A;
+    border-radius: 2px;
+    cursor: pointer;
+    margin: 10px auto 0 auto;
+}
+
+.link-btn:hover {
+    color: #fff;
+    text-decoration: none;
+}

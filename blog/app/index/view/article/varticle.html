@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>码农博客-PHP技术交流博客</title>
+		<link rel="stylesheet" href="public/styles/reset.css">
+		<link rel="stylesheet" href="public/styles/fonts.css">
+		<link rel="stylesheet" href="public/styles/coding.css">
+		<link type="image/x-icon" href="public/images/global/favicon.ico" rel="icon">
+	</head>
+	<body>
+		<!-- 头部区域开始 -->
+	<?php include 'app/index/view/public/navbar.html';?>
+	<!-- 头部区域结束 -->
+		<!-- 文章主要区域开始 -->
+		<div id="article-main">
+			<!-- 左侧文章内容区域开始 -->
+			<div id="article-content">
+				<h3 id="article-subject"><?php echo $article['subject'];?></h3>
+				<div id="article-info">
+					<div class="author-mini-head">
+						<a href="#"><img src="assets/images/avatars/<?php echo $article['admin_photo'];?>" alt=""></a>
+					</div>
+					<span><?php echo $article['nick_name'];?> 发表于
+					<?php echo date('Y-m-d H:i:s',$article['created_at']);?></span>
+					<div class="view-info">
+						<i class="icon-eye-open"></i>
+						<?php echo $article['browse_times'];?>
+					</div>
+					<div class="comment-info">
+						<i class="icon-comment"></i>
+						<?php echo $article['comment_number'];?>
+					</div>
+				</div>
+				<!-- 文章正文开始 -->
+			<div id="article-detail">
+				<p><img  width="90%" height="500px" src="upload/admin/images/<?php echo $article['subject_picture'];?>" alt=""></p>
+				<?php echo $article['content'];?>
+			</div>
+			<!-- 文章正文结束 -->
+				<!-- 评论表单区域开始 -->
+				<div id="article-comment">
+					<div id="article-comment-header">
+						<div class="comment-title"><i class="icon-comment"></i>&nbsp;我来说两句</div>
+						<div class="comment-count">
+							<a href="#" target="_blank">共<?php echo $article['comment_number'];?>条评论</a>
+						</div>
+					</div>
+					
+					<div id="article-comment-body">
+						<!-- 用户没有登录的情况下显示的HTML代码段开始 -->
+						<?php if(!isset($_SESSION['user'])){?>
+						<div class="no-login-area">
+							<div class="no-login-tip">
+								<a href="?a=login&c=user">登录</a>
+								后参与评论
+							</div>
+						</div>
+						<!-- 用户没有登录的情况下显示的HTML代码段结束 -->
+						<?php }else{?>
+						<!-- 用户登录情况下显示的HTML代码开始 -->
+
+						<div class="comment-area">
+							<form action="?a=create&c=comment&aid=<?php echo $article['id'];?>" method="post">
+								<textarea name="comment" id="comment" cols="30" rows="10" placeholder="我有话说"></textarea>
+								<input type="submit" value="发表评论" id="btn-comment">
+								<!-- <input type="submit" value="发表评论" id="addComment"> -->
+							</form>
+						</div>
+						<?php }?>
+						<!-- 用户登录情况下显示的HTML代码结束 -->
+					</div>
+				</div>
+				<!-- 评论表单区域结束 -->
+				<!-- 评论列表区域开始 -->
+			<div id="article-comment-list">
+				<?php foreach($comments as $value){?>
+				<div class="article-comment-item">
+					<div class="user-head">
+						<a href="#">
+							<img src="public/images/head/<?php echo $value['user_photo'];?>" alt="">
+						</a>
+					</div>
+					<div class="comment-content">
+						<div class="username">
+							<a href="#">
+								<?php echo $value['nick_name'];?>
+							</a>
+						</div>
+						<div class="comment-text">
+							<?php echo $value['comment'];?>
+						</div>
+						<div class="comment-time">
+							<i class="icon-time"></i>
+							<?php echo date('Y-m-d H:i:s',$value['created_at']);?>
+						</div>
+					</div>
+				</div>
+				<?php }?>
+			</div>
+			<!-- 评论列表区域结束 -->
+			</div>
+			<!-- 左侧文章内容区域结束 -->
+			<!-- 左侧侧边框区域开始 -->
+			<div id="article-sidebar">
+				<div class="common-slide">
+				<div class="common-slide-title">热门标签</div>
+				<ul>
+					<?php foreach($cates as $value){?>
+					<li class="blog-hot-tags">
+						<?php echo $value['category_name'];?>
+					</li>
+					<?php }?>
+				</ul>
+			</div>
+				<div class="common-slide">
+					<div class="common-slide-title">博主推荐</div>
+					<div class="blogger-recommend-list">
+						<?php foreach($admins as $value){?>
+						<div class="blogger-recommend-item">
+							<a href="#" class="blogger-recommend-author-image">
+								<img src="assets/images/avatars/<?php echo $value['admin_photo'];?>" alt="">
+							</a>
+							<div class="blogger-recommend-author-info">
+								<h3><a href="#"><?php echo $value['nick_name'];?></a></h3>
+								<div class="blogger-recommend-detail">
+									<span>博客文章：<?php echo $value['num'];?></span>
+								</div>
+							</div>
+						</div>		
+						<?php }?>
+					</div>
+				</div>
+			</div>
+			<!-- 左侧侧边框区域结束 -->
+		</div>
+		<!-- 文章主要区域结束 -->
+		<!-- 页脚区域开始 -->
+		<?php include 'app/index/view/public/footer.html';?>
+		<!-- 页脚区域结束 -->
+	</body>
+	
+</html>

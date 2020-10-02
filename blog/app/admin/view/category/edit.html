@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta charset="utf-8">
+		<title>码农博客后台管理系统</title>
+		<meta name="description" content="overview &amp; stats" >
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<!-- bootstrap & fontawesome -->
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css">
+		<!-- page specific plugin styles -->
+		<!-- text fonts -->
+		<link rel="stylesheet" href="assets/css/fonts.googleapis.com.css">
+		<!-- ace styles -->
+		<link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style">
+		<link rel="stylesheet" href="assets/css/ace-skins.min.css">
+		<link rel="stylesheet" href="assets/css/ace-rtl.min.css">
+		<script src="assets/js/ace-extra.min.js"></script>
+	</head>
+	<body class="no-skin">
+		<?php include 'app/admin/view/public/navbar.html';?>
+		<div class="main-container ace-save-state" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.loadState('main-container')}catch(e){}
+			</script>
+			<?php include 'app/admin/view/public/sidebar.html';?>
+			<div class="main-content">
+				<div class="main-content-inner">
+					<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="index.html">首页</a>
+							</li>
+							<li class="active">文章分类</li>
+						</ul>
+					</div>
+					<div class="page-content">
+						<div class="page-header">
+							<h1>编辑分类</h1>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- 编辑分类表单区域开始 -->
+								<form action="?a=update&c=category&id=<?php echo $category['id']; ?>" method="post">
+									<table class="table  table-bordered">
+										<tr>
+											<td class="col-xs-2">分类名称</td>
+											<td>
+												<div class="col-xs-4">
+													<input type="text" name="category_name" class="form-control" value="<?php echo $category['category_name']; ?>">
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td class="col-xs-2">排序数字</td>
+											<td>
+												<div class="col-xs-4">
+													<input type="text" name="sort_number" class="form-control" value="<?php echo $category['sort_number']; ?>">
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<button class="btn btn-primary" type="submit">
+												<i class="ace-icon fa fa-check bigger-110"></i>
+												确认编辑
+												</button>
+												<button class="btn" type="reset">
+												<i class="ace-icon fa fa-undo bigger-110"></i>
+												放弃编辑
+												</button>
+											</td>
+										</tr>
+									</table>
+								</form>
+								<!-- 编辑分类表单区域结束 -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- basic scripts -->
+		<!--[if !IE]> -->
+		<script src="assets/js/jquery-2.1.4.min.js"></script>
+		<!-- <![endif]-->
+		<!--[if IE]>
+		<script src="assets/js/jquery-1.11.3.min.js"></script>
+		<![endif]-->
+		<script type="text/javascript">
+		if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+		</script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<!-- page specific plugin scripts -->
+		<script src="assets/js/jquery-ui.custom.min.js"></script>
+		<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+		<script src="assets/js/jquery.easypiechart.min.js"></script>
+		<script src="assets/js/jquery.sparkline.index.min.js"></script>
+		<script src="assets/js/jquery.flot.min.js"></script>
+		<script src="assets/js/jquery.flot.pie.min.js"></script>
+		<script src="assets/js/jquery.flot.resize.min.js"></script>
+		<!-- ace scripts -->
+		<script src="assets/js/ace-elements.min.js"></script>
+		<script src="assets/js/ace.min.js"></script>
+	</body>
+</html>

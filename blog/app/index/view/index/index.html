@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>码农博客-PHP技术交流博客</title>
+	<link rel="stylesheet" href="public/styles/reset.css">
+	<link rel="stylesheet" href="public/styles/fonts.css">
+	<link rel="stylesheet" href="public/styles/coding.css">
+	<link type="image/x-icon" href="public/images/global/favicon.ico" rel="icon">
+</head>
+
+<body>
+	<!-- 头部区域开始 -->
+	<?php include 'app/index/view/public/navbar.html';?>
+	<!-- 头部区域结束 -->
+	<!-- 主要区域开始 -->
+	<div id="main">
+		<ul class="article-list">
+			<?php foreach($arts as $key=>$value){?>
+			<!-- 单一文章信息开始 -->
+			<li class="article-item">
+				<div class="article-item-image">
+					<a href="?a=varticle&c=article&id=<?php echo $value['id'];?>" target="_blank">
+						<img src="upload/admin/images/<?php echo $value['subject_picture'];?>" alt=""
+							title="<?php echo $value['subject'];?>">
+					</a>
+				</div>
+				<div class="article-item-content">
+					<a href="?a=varticle&c=article&id=<?php echo $value['id'];?>" class="article-item-title"
+						title="<?php echo $value['subject'];?>" target="_blank"><?php echo $value['subject'];?></a>
+					<div class="article-item-text">
+						<?php echo $value['content'];?>
+					</div>
+					<div class="article-item-info">
+						<span class="article-item-time">
+							<?php echo date('Y-m-d H:i:s', $value['created_at']);?>
+						</span>
+						<span class="article-item-browse">
+							<i class="icon-eye-open"></i>
+							<?php echo $value['browse_times'];?>
+						</span>
+						<span class="article-item-comment">
+							<i class="icon-comment"></i>
+							<?php echo $value['comment_number'];?>
+						</span>
+					</div>
+				</div>
+			</li>
+			<!-- 单一文章信息结束 -->
+			<?php }?>
+		</ul>
+		<div class="page-customize">
+			<!--  -->
+			<div class="pages">
+				<div class="aui-pager">
+					<span class="ucd-pager-count">总条数: <?php echo $page->total;?></span>
+					<ul class="ucd-pager-pages">
+						<?php if($p > 1){?>
+						<li id="prev_" class="ucd-pager-btn ucd-pager-prev">
+							
+								<a href="<?php echo $page->prevURL();?>"></a>
+							
+						</li>
+						<?php }?>
+
+						<?php $midURLs = $page->midURLs();?>
+						<?php foreach($midURLs as $value){?>
+						<li id="internal_page_1_" class="ucd-pager-page <?php if($p==$value['page']){?>active<?php }?>">
+							<a href="<?php echo $value['url']; ?>" data-page="0">
+								<?php echo $value['page']; ?>
+							</a>
+						</li>
+						<?php }?>
+
+						<!-- 当前页 小于 总页数 才显示下一页按钮 -->
+						<?php if($p<$page->pageNum){?>
+						<li id="next_" class="ucd-pager-btn ucd-pager-next">
+							<a href="<?php echo $page->nextURL();?>" data-page="1"></a>
+						</li>
+						<?php }?>
+					</ul>
+					
+				</div>
+			</div>
+			<!--  -->
+		</div>
+	</div>
+	<!-- 主要区域结束 -->
+	<!-- 页脚区域开始 -->
+	<?php include 'app/index/view/public/footer.html';?>
+	<!-- 页脚区域结束 -->
+</body>
+
+</html>

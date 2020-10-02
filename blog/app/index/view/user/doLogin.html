@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>码农博客-PHP技术交流博客</title>
+    <link rel="stylesheet" href="public/styles/reset.css">
+    <link rel="stylesheet" href="public/styles/fonts.css">
+    <link rel="stylesheet" href="public/styles/coding.css">
+    <link type="image/x-icon" href="public/images/global/favicon.ico" rel="icon">
+</head>
+
+<body>
+    <div id="jump-container">
+        <?php if($error == 0){?>
+        <!-- 登录成功时显示的HTML代码开始 -->
+        <div class="system-message-wrapper">
+            <div class="system-message-background"></div>
+            <div class="system-message-tip">
+                <div class="system-message-tip-image">
+                    <img src="public/images/global/checked.png" alt="">
+                </div>
+                <div class="system-message-tip-text">恭喜您，登录成功</div>
+                <div class="system-message-tip-text">
+                    <a href="?a=index&c=index">返回首页</a>
+                </div>
+            </div>
+        </div>
+        <!--登录成功时显示的HTML代码结束-->
+        <?php }?>
+
+        <?php if($error == 1){?>
+        <!-- 登录失败时显示的HTML代码开始 -->
+        <div class="system-message-wrapper">
+            <div class="system-message-background"></div>
+            <div class="system-message-tip">
+                <div class="system-message-tip-image">
+                    <img src="public/images/global/unchecked.png" alt="">
+                </div>
+                <div class="system-message-tip-text">对不起，用户登录失败</div>
+                <div class="system-message-tip-text">
+                    <a href="?a=login&c=user">重新登录</a>
+                </div>
+            </div>
+        </div>
+        <!--登录失败时显示的HTML代码结束-->
+        <?php }?>
+
+        <?php if($error == 4){?>
+        <!-- 验证码不一致 -->
+        <div class="system-message-wrapper">
+            <div class="system-message-background"></div>
+            <div class="system-message-tip">
+                <div class="system-message-tip-image">
+                    <img src="public/images/global/unchecked.png" alt="">
+                </div>
+                <div class="system-message-tip-text">对不起，验证码错误</div>
+                <div class="system-message-tip-text">
+                    <a href="?a=login&c=user">重新登录</a>
+                </div>
+            </div>
+        </div>
+        <!--验证码不一致-->
+        <?php }?>
+
+    </div>
+</body>
+
+</html>
