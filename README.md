@@ -1,2 +1,2 @@
-＃ 我的博客
-在文件中的program_coding_change.log包含所有的基本开发流程，和data.sql就是数据库所有的表文件
+＃我的博客
+本项目是基MVC模式下的php博客项目，在program_coding_change.log文件中有所有的开发流程，和data.sql是数据库表文件，用户可直接部署构建。
